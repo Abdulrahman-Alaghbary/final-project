@@ -1,4 +1,10 @@
-done by Osama Nasr Almesri 202170235 Abdulrahman Alaghbary 202174018
+done by: 
+Osama Nasr Almesri 202170235 
+Abdulrahman Alaghbary 202174018
+
+
+
+
 
 Automatic Image Colorization Using Deep Learning
 This project demonstrates automatic colorization of black and white images using deep neural networks. By leveraging a pre-trained model, the script takes a grayscale image as input and produces a colorized version of the image.
