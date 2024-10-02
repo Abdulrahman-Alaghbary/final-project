@@ -1,0 +1,148 @@
+Example 1
+-----------------------------------------------------------------
+boy(ahmed).
+boy(ali).
+
+girl(sarah).
+girl(mai).
+
+subject(arabic).
+subject(english).
+subject(math).
+
+study(ahmed, arabic).
+study(ali, X):-
+	study(ahmed, X).
+	
+study(X, english):-
+	girl(X).
+	
+study(X, math):-
+	girl(X); boy(X).
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+Family example
+----------------------------------------------------------------
+female(pam).
+female(liz).
+female(pat).
+female(ann).
+male(jim).
+male(bob).
+male(tom).
+male(peter).
+parent(pam,bob).
+parent(tom,bob).
+parent(tom,liz).
+parent(bob,ann).
+parent(bob,pat).
+parent(pat,jim).
+parent(bob,peter).
+parent(peter,jim).
+
+mother(X,Y):- parent(X,Y),female(X).
+father(X,Y):- parent(X,Y),male(X).
+haschild(X):- parent(X,_).
+sister(X,Y):- parent(Z,X),parent(Z,Y),female(X),X\==Y.
+brother(X,Y):-parent(Z,X),parent(Z,Y),male(X),X\==Y.
+-------------------------------------------------------
+Family tree extention
+
+
+female(pam).
+female(liz).
+female(pat).
+female(ann).
+male(jim).
+male(bob).
+male(tom).
+male(peter).
+parent(pam,bob).
+parent(tom,bob).
+parent(tom,liz).
+parent(bob,ann).
+parent(bob,pat).
+parent(pat,jim).
+parent(bob,peter).
+parent(peter,jim).
+mother(X,Y):- parent(X,Y),female(X).
+father(X,Y):-parent(X,Y),male(X).
+sister(X,Y):-parent(Z,X),parent(Z,Y),female(X),X\==Y.
+brother(X,Y):-parent(Z,X),parent(Z,Y),male(X),X\==Y.
+grandparent(X,Y):-parent(X,Z),parent(Z,Y).
+grandmother(X,Z):-mother(X,Y),parent(Y,Z).
+grandfather(X,Z):-father(X,Y),parent(Y,Z).
+wife(X,Y):-parent(X,Z),parent(Y,Z),female(X),male(Y).
+uncle(X,Z):-brother(X,Y),parent(Y,Z).
+
+predecessor(X, Z) :- parent(X, Z).
+predecessor(X, Z) :- parent(X, Y),predecessor(Y, Z).
+---------------------------------------------------------------------
+exercise 1
+---------------------------------------------------------------------
+border(sussex, kent).
+border(sussex, surrey).
+border(surrey, kent).
+border(hampshire, sussex).
+border(hampshire, surrey).
+border(hampshire, berkshire).
+border(berkshire, surrey).
+border(wiltshire, hampshire).
+border(wiltshire, berkshire).
+
+adjacent(X, Y) :- border(X, Y).
+	adjacent(X, Y) :- border(Y, X).		
+
+valid(X, Y) :- adjacent(X, Z), adjacent(Z, Y)
+------------------------------------------------------------------------
+exercise 2
+-------------------------------------------------------------------------
+girl(sarah, 19).
+girl(mona, 20).
+girl(amira, 20).
+girl(arwa, 21).
+
+boy(omar, 19).
+boy(ahmed, 20).
+boy(yasser, 21).
+boy(mohammed, 21).
+
+section(1, kareem).
+section(1, X):-
+	boy(X, Y), Y = 20.
+	
+section(2, soad).
+section(2, X):-
+	girl(X, Y), Y < 20.
+section(2, X):-
+	boy(X, 19).
+	
+section(3, X):-
+	boy(X , 21); girl(X, 21).
+
+------------------------------------------------------------------------
+
+loop1
+------------------------------------------------------------------------
+count_to_10(10) :- write(10),nl.
+count_to_10(X) :-
+write(X),nl,
+Y is X + 1,
+count_to_10(Y)
+-----------------------------------------------------------------------
+loop2
+------------------------------------------------------------------------
+count_down(L, H) :-
+between(L, H, Y),
+Z is H - Y,
+write(Z), nl.
+count_up(L, H) :-
+between(L, H, Y),
+Z is L + Y,
+write(Z), nl.
+
+
